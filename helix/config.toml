@@ -1,0 +1,16 @@
+theme = "gruvbox_dark_hard"
+
+[editor]
+true-color = true
+line-number = "relative"
+bufferline = "always"
+
+[editor.cursor-shape]
+insert = "bar"
+
+[editor.lsp]
+display-messages = true
+
+[keys.normal]
+G = "goto_file_end"
+esc = ["collapse_selection", "keep_primary_selection"]
