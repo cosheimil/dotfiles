@@ -28,6 +28,9 @@ from libqtile import bar, layout, widget
 from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
+import os
+import subprocess
+from libqtile import hook
 
 mod = "mod4"
 terminal = guess_terminal()
@@ -175,6 +178,13 @@ floating_layout = layout.Floating(
         Match(title="pinentry"),  # GPG key password entry
     ]
 )
+
+# Autostart
+@hook.subscribe.startup
+def autostart():
+    home = os.path.expanduser('~/.config/qtile/autostart.sh')
+    subprocess.call([home])
+
 auto_fullscreen = True
 focus_on_window_activation = "smart"
 reconfigure_screens = True
