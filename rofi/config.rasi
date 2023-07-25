@@ -1,1 +1,1 @@
-@theme "~/.config/rofi/themes/gruvbox/gruvbox-dark.rasi"
+@theme "/nix/store/hddx5vpzys2gzvlk8asyw8llrlmj8yqj-rofi-1.7.5/share/rofi/themes/gruvbox-dark-hard.rasi"
