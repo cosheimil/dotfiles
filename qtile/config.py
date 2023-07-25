@@ -74,6 +74,8 @@ keys = [
     Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
     Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
     Key([mod], "r", lazy.spawn("rofi -show drun"), desc="Spawn a command using a prompt widget"),
+    Key([], "XF86AudioRaiseVolume", lazy.spawn("amixer -q sset Master playback 5%+"), desc="Volume up"),
+    Key([], "XF86AudioLowerVolume", lazy.spawn("amixer -q sset Master playback 5%-"), desc="Volume down")
 ]
 
 groups = [Group(i) for i in "123456789"]
@@ -119,8 +121,8 @@ layouts = [
 ]
 
 widget_defaults = dict(
-    font="sans",
-    fontsize=12,
+    font="Hurmit Nerd Font Mono",
+    fontsize=16,
     padding=3,
 )
 extension_defaults = widget_defaults.copy()
