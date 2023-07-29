@@ -15,30 +15,82 @@
   # release notes.
   home.stateVersion = "23.05"; # Please read the comment before changing.
 
+  # Fonts working
+  fonts.fontconfig.enable = true;
+
   # The home.packages option allows you to install Nix packages into your
   # environment.
-  home.packages = [
-    # # Adds the 'hello' command to your environment. It prints a friendly
-    # # "Hello, world!" when run.
-    # pkgs.hello
+  home.packages = with pkgs; [
+    # GTK Themes
+    vimix-gtk-themes
+    stilo-themes
+    zuki-themes
+    dracula-theme
 
-    # # It is sometimes useful to fine-tune packages, for example, by applying
-    # # overrides. You can do that directly here, just don't forget the
-    # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
-    # # fonts?
-    # (pkgs.nerdfonts.override { fonts = [ "FantasqueSansMono" ]; })
+    # Terminal and more
+    kitty
+    zsh
+    neofetch
+    btop 
+    arandr
+    conky
+    feh
+      
+    # Dev
+    helix
+    vscodium
+    gh
+    
+    # Window Managers
+    qtile
+    awesome
+    dunst
+    rofi
+    picom
+    nitrogen
 
-    # # You can also create simple shell scripts directly inside your
-    # # configuration. For example, this adds a command 'my-hello' to your
-    # # environment:
-    # (pkgs.writeShellScriptBin "my-hello" ''
-    #   echo "Hello, ${config.home.username}!"
-    # '')
+    # Graphics
+    flameshot
+
+    # Fonts
+    (nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" "FantasqueSansMono" ]; })
+
+    # Internet
+    firefox
+
   ];
+
+  # Git working
+  programs.git = {
+    package = pkgs.gitAndTools.gitFull;
+    enable = true;
+    userName = "Cosheimil";
+    userEmail = "a.varvus@ya.ru";
+    # signing = {
+    #   key = "me@yrashk.com";
+    #   signByDefault = false;
+    # };
+  };
+
+  # Services working
+  services.dunst = {
+    enable = true;
+  };
+
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
   home.file = {
+    # Kitty setup
+    ".config/kitty/kitty.conf".text = ''
+      font_size 11.0
+
+      # font_family HurmitNFM-Regular
+      bold_font auto
+      italic_font auto
+      bold_italic_font auto
+    '';
+    
     # # Building this configuration will create a copy of 'dotfiles/screenrc' in
     # # the Nix store. Activating the configuration will then make '~/.screenrc' a
     # # symlink to the Nix store copy.
@@ -62,7 +114,7 @@
   #
   # if you don't want to manage your shell through Home Manager.
   home.sessionVariables = {
-    # EDITOR = "emacs";
+    EDITOR = "helixx";
   };
 
   # Let Home Manager install and manage itself.
