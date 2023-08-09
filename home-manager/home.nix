@@ -21,25 +21,32 @@
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = with pkgs; [
-    # GTK Themes
-    vimix-gtk-themes
-    stilo-themes
-    zuki-themes
-    dracula-theme
+    # GTK Themes and more ...
+    gruvbox-dark-gtk
+    gruvbox-dark-icons-gtk
+    lxappearance
+    capitaine-cursors
+    capitaine-cursors-themed
 
     # Terminal and more
     kitty
     zsh
+    xclip
     neofetch
     btop 
     arandr
     conky
     feh
+    gnupg
+    pass
+    passff-host
+    qtpass
       
     # Dev
     helix
     vscodium
     gh
+    xclip
     
     # Window Managers
     qtile
@@ -49,16 +56,72 @@
     picom
     nitrogen
 
+    # Qtile deps
+    python3Packages.keyring
+    python3Packages.xcffib
+    # python3Packages.cairocffi-xcffib
+    python3Packages.setuptools
+    python3Packages.setuptools_scm
+    python3Packages.dateutil
+    python3Packages.dbus-python
+    python3Packages.mpd2
+    python3Packages.psutil
+    python3Packages.pyxdg
+    python3Packages.pygobject3
+    python3Packages.dbus-next
+    kbdd
+
     # Graphics
     flameshot
+    vlc
+
+    # Files
+    xfce.thunar
+    xfce.thunar-volman
+    pcmanfm
+    libsForQt5.dolphin
+    udisks2
+    udevil
+    gvfs
+
+    # Music
+    pavucontrol
+    playerctl
+
+    # Office
+    xournalpp
+    onlyoffice-bin
 
     # Fonts
-    (nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" "FantasqueSansMono" ]; })
+    (nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" "FantasqueSansMono" "Hermit" ]; })
 
     # Internet
-    firefox
+    (firefox.override { extraNativeMessagingHosts = [ passff-host ]; })
+    deluge
 
+    # Power Management
+    xfce.xfce4-power-manager
   ];
+
+  # Zsh config
+  programs.zsh = {
+    enable = true;
+    shellAliases = {
+      ll = "ls - l";
+      update = "home-manager switch && sudo nixos-rebuild switch --upgrade && sudo nix-collect-garbage -d";
+    };
+    oh-my-zsh = {
+      enable = true;
+      plugins = [ "git" ];
+      theme = "fino-time";
+    };
+    zplug = {
+        enable = true;
+        plugins = [
+          { name = "zsh-users/zsh-autosuggestions"; } # Simple plugin installation
+        ];
+    }; 
+  };
 
   # Git working
   programs.git = {
@@ -66,17 +129,7 @@
     enable = true;
     userName = "Cosheimil";
     userEmail = "a.varvus@ya.ru";
-    # signing = {
-    #   key = "me@yrashk.com";
-    #   signByDefault = false;
-    # };
   };
-
-  # Services working
-  services.dunst = {
-    enable = true;
-  };
-
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
@@ -85,10 +138,11 @@
     ".config/kitty/kitty.conf".text = ''
       font_size 11.0
 
-      # font_family HurmitNFM-Regular
+      font_family HurmitNFM-Regular
       bold_font auto
       italic_font auto
       bold_italic_font auto
+      confirm_os_window_close -1
     '';
     
     # # Building this configuration will create a copy of 'dotfiles/screenrc' in
@@ -114,7 +168,7 @@
   #
   # if you don't want to manage your shell through Home Manager.
   home.sessionVariables = {
-    EDITOR = "helixx";
+    EDITOR = "hx";
   };
 
   # Let Home Manager install and manage itself.
