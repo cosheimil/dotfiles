@@ -24,16 +24,32 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-from libqtile import bar, layout, widget
+from libqtile import layout, widget
 from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
 import os
 import subprocess
 from libqtile import hook
+from colors import gruvbox, nord_fox
+from bar import bar
 
 mod = "mod4"
 terminal = guess_terminal()
+browser = "firefox"
+margin = 4
+border_rules = {
+    "border_normal":gruvbox['fg'],
+    "border_focus":gruvbox['cyan'],
+    "border_width":2,
+    "margin":margin
+}
+widget_defaults = dict(
+    font="Hurmit Nerd Font Mono",
+    fontsize=16,
+    padding=3,
+    background=gruvbox['bg']
+)
 
 keys = [
     # A list of available commands that can be bound to keys can be found
@@ -43,6 +59,7 @@ keys = [
     Key([mod], "l", lazy.layout.right(), desc="Move focus to right"),
     Key([mod], "j", lazy.layout.down(), desc="Move focus down"),
     Key([mod], "k", lazy.layout.up(), desc="Move focus up"),
+    Key([mod], "m", lazy.window.toggle_maximize(), desc="Toggle maximize"), 
     Key([mod], "space", lazy.widget["keyboardlayout"].next_keyboard(), desc="Next keyboard layout."),
     # Move windows between left/right columns or move up/down in current stack.
     # Moving out of range in Columns layout will create new column.
@@ -74,11 +91,43 @@ keys = [
     Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
     Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
     Key([mod], "r", lazy.spawn("rofi -show drun"), desc="Spawn a command using a prompt widget"),
+    Key([mod], "b", lazy.spawn(browser), desc="Spawn browser"),
     Key([], "XF86AudioRaiseVolume", lazy.spawn("amixer -q sset Master playback 5%+"), desc="Volume up"),
     Key([], "XF86AudioLowerVolume", lazy.spawn("amixer -q sset Master playback 5%-"), desc="Volume down")
 ]
 
-groups = [Group(i) for i in "123456789"]
+#   ____ ____   ___  _   _ ____  ____
+#  / ___|  _ \ / _ \| | | |  _ \/ ___|
+# | |  _| |_) | | | | | | | |_) \___ \
+# | |_| |  _ <| |_| | |_| |  __/ ___) |
+#  \____|_| \_\\___/ \___/|_|   |____/
+
+groups = [
+    Group(
+        '1',
+        label="",
+        matches=[
+            Match(wm_class='firefox'),
+        ],
+        layout="stack"
+    ),
+    Group('2', label="", layout="monadtall"),
+    Group('3', label="󰨞", layout="columns"),
+    Group(
+        '4',
+        label="",
+        layout="stack"
+    ),
+    Group(
+        '5',
+        label="",
+        layout="stack"
+    ),
+    Group(
+        '6',
+        label="󰡨"
+    )
+]
 
 for i in groups:
     keys.extend(
@@ -103,51 +152,18 @@ for i in groups:
             #     desc="move focused window to group {}".format(i.name)),
         ]
     )
-margin = 3
+
 layouts = [
-    layout.Bsp(margin=margin),
-    layout.TreeTab(),
-    # layout.Max(),
-    # Try more layouts by unleashing below layouts.
-    layout.Matrix(),
-    # layout.MonadTall(),
-    # layout.MonadWide(),
-    layout.RatioTile(),
-    # layout.Tile(),
-    # layout.VerticalTile(),
-    # layout.Zoomy(),
+    layout.Bsp(**border_rules),
+    layout.TreeTab(**border_rules),
+    layout.Matrix(**border_rules),
 ]
 
-widget_defaults = dict(
-    font="Hurmit Nerd Font Mono",
-    fontsize=16,
-    padding=3,
-)
 extension_defaults = widget_defaults.copy()
 
 screens = [
     Screen(
-        bottom=bar.Bar(
-            [
-                widget.CurrentLayout(),
-                widget.GroupBox(),
-                widget.Prompt(),
-                widget.WindowName(),
-                widget.Chord(
-                    chords_colors={
-                        "launch": ("#ff0000", "#ffffff"),
-                    },
-                    name_transform=lambda name: name.upper(),
-                ),
-                widget.KeyboardKbdd(configured_keyboards=['us', 'ru']),
-                widget.Systray(),
-                widget.Clock(format="%d/%m/%y %H:%M:%S"),
-                widget.QuickExit(),
-            ],
-            24,
-            # border_width=[2, 0, 2, 0],  # Draw top and bottom borders
-            # border_color=["ff00ff", "000000", "ff00ff", "000000"]  # Borders are magenta
-        ),
+        top=bar
     ),
 ]
 
