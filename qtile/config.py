@@ -93,7 +93,8 @@ keys = [
     Key([mod], "r", lazy.spawn("rofi -show drun"), desc="Spawn a command using a prompt widget"),
     Key([mod], "b", lazy.spawn(browser), desc="Spawn browser"),
     Key([], "XF86AudioRaiseVolume", lazy.spawn("amixer -q sset Master playback 5%+"), desc="Volume up"),
-    Key([], "XF86AudioLowerVolume", lazy.spawn("amixer -q sset Master playback 5%-"), desc="Volume down")
+    Key([], "XF86AudioLowerVolume", lazy.spawn("amixer -q sset Master playback 5%-"), desc="Volume down"),
+    Key([mod], "p", lazy.spawn('rofi -show menu -modi "menu:rofi-power-menu --choices=shutdown/reboot/suspend"')),
 ]
 
 #   ____ ____   ___  _   _ ____  ____
