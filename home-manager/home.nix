@@ -14,6 +14,7 @@
   # want to update the value, then make sure to first check the Home Manager
   # release notes.
   home.stateVersion = "23.05"; # Please read the comment before changing.
+  home.sessionPath = [ "$HOME/.local/bin" ];
 
   # Fonts working
   fonts.fontconfig.enable = true;
@@ -41,20 +42,25 @@
     pass
     passff-host
     qtpass
+    unzip
       
     # Dev
     helix
-    vscodium
     gh
     xclip
+    qalculate-qt
     
     # Window Managers
     qtile
     awesome
     dunst
     rofi
+    rofi-calc
+    rofi-pass
+    rofi-power-menu
     picom
     nitrogen
+    haskellPackages.iwlib
 
     # Qtile deps
     python3Packages.keyring
@@ -83,6 +89,8 @@
     udisks2
     udevil
     gvfs
+    dbus
+    xdg-utils
 
     # Music
     pavucontrol
@@ -129,6 +137,18 @@
     enable = true;
     userName = "Cosheimil";
     userEmail = "a.varvus@ya.ru";
+  };
+
+  # VSCodium
+  programs.vscode = {
+    enable = true;
+    package = pkgs.vscodium;
+    extensions = with pkgs.vscode-extensions; [
+      vscodevim.vim
+      yzhang.markdown-all-in-one
+      ms-toolsai.jupyter     
+      jdinhlife.gruvbox
+    ];
   };
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
