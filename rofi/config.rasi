@@ -1,1 +1,2 @@
-@theme "/nix/store/hddx5vpzys2gzvlk8asyw8llrlmj8yqj-rofi-1.7.5/share/rofi/themes/gruvbox-dark-hard.rasi"
+//@theme "/nix/store/hddx5vpzys2gzvlk8asyw8llrlmj8yqj-rofi-1.7.5/share/rofi/themes/gruvbox-dark-hard.rasi"
+@theme "/nix/store/nkkpcgz3p9x6fy6iq4lb8dx9zya5ldpa-rofi-1.7.5/share/rofi/themes/gruvbox-dark-hard.rasi"
