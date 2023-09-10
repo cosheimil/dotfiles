@@ -46,6 +46,7 @@
       
     # Dev
     helix
+    neovim
     gh
     xclip
     qalculate-qt
@@ -61,6 +62,8 @@
     picom
     nitrogen
     haskellPackages.iwlib
+    brightnessctl
+    maim
 
     # Qtile deps
     python3Packages.keyring
@@ -94,6 +97,7 @@
 
     # Music
     pavucontrol
+    mpc-cli
     playerctl
 
     # Office
