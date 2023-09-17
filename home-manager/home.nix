@@ -48,6 +48,8 @@
     helix
     neovim
     gh
+    joshuto
+    obsidian
     xclip
     qalculate-qt
     
@@ -59,7 +61,6 @@
     rofi-calc
     rofi-pass
     rofi-power-menu
-    picom
     nitrogen
     haskellPackages.iwlib
     brightnessctl
@@ -89,6 +90,7 @@
     xfce.thunar-volman
     pcmanfm
     libsForQt5.dolphin
+    libsForQt5.okular
     udisks2
     udevil
     gvfs
@@ -110,6 +112,7 @@
     # Internet
     (firefox.override { extraNativeMessagingHosts = [ passff-host ]; })
     deluge
+    openvpn
 
     # Power Management
     xfce.xfce4-power-manager
@@ -148,12 +151,40 @@
     enable = true;
     package = pkgs.vscodium;
     extensions = with pkgs.vscode-extensions; [
-      vscodevim.vim
       yzhang.markdown-all-in-one
       ms-toolsai.jupyter     
       jdinhlife.gruvbox
     ];
   };
+
+  # tmux
+  programs.tmux = {
+    enable = true;
+    sensibleOnTop = false;
+  };
+
+  # Picom
+  services.picom = {
+   enable = true;
+   vSync = true;
+   shadow = true;
+   backend = "glx";
+   activeOpacity = 0.9;
+   wintypes = {
+     popup_menu = { opacity = config.services.picom.menuOpacity; };
+     dropdown_menu = { opacity = config.services.picom.menuOpacity; };
+   };
+   fade = true;
+   fadeDelta = 4;
+   settings = {
+    blur = {
+      method = "dual_kawase";
+      strength = 8;
+      background = true;
+    };
+   };
+  };
+
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
@@ -192,7 +223,7 @@
   #
   # if you don't want to manage your shell through Home Manager.
   home.sessionVariables = {
-    EDITOR = "hx";
+    EDITOR = "nvim";
   };
 
   # Let Home Manager install and manage itself.
