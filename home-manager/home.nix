@@ -45,10 +45,11 @@
     unzip
       
     # Dev
-    helix
     neovim
+    poetry
     gh
     joshuto
+    direnv
     obsidian
     xclip
     qalculate-qt
@@ -149,12 +150,25 @@
   # VSCodium
   programs.vscode = {
     enable = true;
-    package = pkgs.vscodium;
+    # package = pkgs.vscodium;
     extensions = with pkgs.vscode-extensions; [
       yzhang.markdown-all-in-one
       ms-toolsai.jupyter     
       jdinhlife.gruvbox
+      jnoortheen.nix-ide
+      mkhl.direnv
+      ms-python.python
+      njpwerner.autodocstring
+      ms-pyright.pyright
+      tamasfe.even-better-toml
     ];
+  };
+
+  # Direnv
+  programs.direnv = {
+    enable = true;
+    enableZshIntegration = true;
+    nix-direnv.enable = true;
   };
 
   # tmux
