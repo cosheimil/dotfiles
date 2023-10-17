@@ -52,6 +52,7 @@
     direnv
     obsidian
     xclip
+    ruff
     qalculate-qt
     
     # Window Managers
@@ -91,12 +92,13 @@
     xfce.thunar-volman
     pcmanfm
     libsForQt5.dolphin
-    libsForQt5.okular
     udisks2
     udevil
     gvfs
     dbus
     xdg-utils
+    krita
+    libsForQt5.okular
 
     # Music
     pavucontrol
@@ -117,6 +119,10 @@
 
     # Power Management
     xfce.xfce4-power-manager
+    networkmanagerapplet
+
+    retroarchFull
+    x2goclient
   ];
 
   # Zsh config
@@ -124,7 +130,8 @@
     enable = true;
     shellAliases = {
       ll = "ls - l";
-      update = "home-manager switch && sudo nixos-rebuild switch --upgrade && sudo nix-collect-garbage -d";
+      update = "nix-channel --update && home-manager switch && flatpak update -y && sudo nixos-rebuild switch --upgrade";
+      clean = "sudo nix-collect-garbage -d";
     };
     oh-my-zsh = {
       enable = true;
@@ -171,6 +178,10 @@
     nix-direnv.enable = true;
   };
 
+  programs.java = {
+    enable = true;
+  };
+
   # tmux
   programs.tmux = {
     enable = true;
@@ -213,6 +224,7 @@
       bold_italic_font auto
       confirm_os_window_close -1
     '';
+    "~/.zshrc".text = "export HSA_OVERRIDE_GFX_VERSION=10.3.0";
     
     # # Building this configuration will create a copy of 'dotfiles/screenrc' in
     # # the Nix store. Activating the configuration will then make '~/.screenrc' a
