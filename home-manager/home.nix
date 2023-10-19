@@ -114,6 +114,7 @@
 
     # Internet
     (firefox.override { extraNativeMessagingHosts = [ passff-host ]; })
+    chromium
     deluge
     openvpn
 
@@ -145,6 +146,9 @@
         ];
     }; 
   };
+
+  # Syncthing
+  services.syncthing.enable = true;
 
   # Git working
   programs.git = {
