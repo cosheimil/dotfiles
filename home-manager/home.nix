@@ -46,6 +46,8 @@
       
     # Dev
     neovim
+    lapce
+    trunk-io
     poetry
     gh
     joshuto
@@ -53,6 +55,8 @@
     obsidian
     xclip
     ruff
+    rustup
+    gcc
     qalculate-qt
     
     # Window Managers
@@ -108,6 +112,8 @@
     # Office
     xournalpp
     onlyoffice-bin
+    wpsoffice
+    font-manager
 
     # Fonts
     (nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" "FantasqueSansMono" "Hermit" ]; })
