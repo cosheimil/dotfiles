@@ -58,6 +58,7 @@
     rustup
     gcc
     qalculate-qt
+    simplescreenrecorder
     
     # Window Managers
     qtile
@@ -120,6 +121,11 @@
 
     # Internet
     (firefox.override { extraNativeMessagingHosts = [ passff-host ]; })
+    (pkgs.discord.override {
+      # remove any overrides that you don't want
+      withOpenASAR = true;
+      # withVencord = true;
+    })
     chromium
     deluge
     openvpn
@@ -131,6 +137,7 @@
     retroarchFull
     x2goclient
   ];
+
 
   # Zsh config
   programs.zsh = {
