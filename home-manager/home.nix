@@ -49,6 +49,10 @@
     lapce
     trunk-io
     poetry
+    jupyter
+    zlib
+    stdenv.cc.cc.lib
+    pam
     gh
     joshuto
     direnv
@@ -58,7 +62,12 @@
     rustup
     gcc
     qalculate-qt
+<<<<<<< Updated upstream
     simplescreenrecorder
+=======
+    texlive.combined.scheme-full
+    texstudio
+>>>>>>> Stashed changes
     
     # Window Managers
     qtile
@@ -134,7 +143,6 @@
     xfce.xfce4-power-manager
     networkmanagerapplet
 
-    retroarchFull
     x2goclient
   ];
 
