@@ -59,8 +59,14 @@
     obsidian
     xclip
     ruff
+    nodejs_20
+    nodePackages_latest.pyright
     rustup
     gcc
+    go
+    wget
+    luarocks
+    julia
     qalculate-qt
 <<<<<<< Updated upstream
     simplescreenrecorder
@@ -132,8 +138,8 @@
     (firefox.override { extraNativeMessagingHosts = [ passff-host ]; })
     (pkgs.discord.override {
       # remove any overrides that you don't want
-      withOpenASAR = true;
-      # withVencord = true;
+      # withOpenASAR = true;
+      withVencord = true;
     })
     chromium
     deluge
@@ -249,7 +255,6 @@
       bold_italic_font auto
       confirm_os_window_close -1
     '';
-    "~/.zshrc".text = "export HSA_OVERRIDE_GFX_VERSION=10.3.0";
     
     # # Building this configuration will create a copy of 'dotfiles/screenrc' in
     # # the Nix store. Activating the configuration will then make '~/.screenrc' a
@@ -275,6 +280,8 @@
   # if you don't want to manage your shell through Home Manager.
   home.sessionVariables = {
     EDITOR = "nvim";
+    LD_LIBRARY_PATH = "$LD_LIBRARY_PATH:${pkgs.glib.out}/lib";
+    HSA_OVERRIDE_GFX_VERSION="10.3.0";
   };
 
   # Let Home Manager install and manage itself.
